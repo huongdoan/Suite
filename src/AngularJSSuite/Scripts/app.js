@@ -5,7 +5,7 @@
         // Angular modules 
        
         // Custom modules 
-         'userService'
+        // 'userService'
         // 3rd Party Modules
         
     ]);

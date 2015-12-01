@@ -8,7 +8,13 @@
 
     function userController($scope, User) {
         $scope.title = 'userController';
-        $scope.Users = User.query();
+        $scope.Users = User.listUser.query();
+        User.login(1,2);
         console.log($scope.Users);
     }
+
+    function logIn() {
+
+    }
+
 })();
