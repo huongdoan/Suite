@@ -33,5 +33,5 @@ module.exports = function (grunt) {
     });
 
 
-    grunt.registerTask('default', ['uglify', 'watch']);
+    //grunt.registerTask('default', ['uglify', 'watch']);
 };

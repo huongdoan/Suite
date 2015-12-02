@@ -1,67 +1,196 @@
 ﻿<!DOCTYPE html>
-<html ng-app="AngularSuiteApp">
+<html >
 <head>
     <meta charset="utf-8" />
     <title>DOTA 2 Heroes</title>
     <link rel="stylesheet" type="text/css" href="/lib/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/lib/bootstrap/dist/css/bootstrap-theme.min.css">
 
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-resource.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-cookies.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-route.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-ui-router.js"></script>
 
     <script src="/lib/jquery/dist/jquery.min.js"></script>
     <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 
-
-    <script src="app.js"></script>
 </head>
-<body ng-cloak>
-    <div ng-controller="userController">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 col-md-offset-7">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <strong class="">Login</strong>
-                        </div>
-                        <div class="panel-body">
-                            <form class="form-horizontal" role="form">
-                                <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-3 control-label">User</label>
-                                    <div class="col-sm-9">
-                                        <input class="form-control" id="inputEmail3" placeholder="Username" required="" type="text">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-3 control-label">Password</label>
-                                    <div class="col-sm-9">
-                                        <input class="form-control" id="inputPassword3" placeholder="Password" required="" type="password">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-sm-offset-3 col-sm-9">
-                                        <div class="checkbox">
-                                            <label class="">
-                                                <input class="" type="checkbox">Remember me
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group last">
-                                    <div class="col-sm-offset-3 col-sm-9">
-                                        <button type="submit" class="btn btn-success btn-sm" ng-click="login">Sign in</button>
-                                        <button type="reset" class="btn btn-default btn-sm">Reset</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="panel-footer">
-                            Not Registered? <a href="#" class="">Register here</a>
-                        </div>
-                    </div>
-                </div>
+<body data-ng-cloak ng-app="AngularSuiteApp">
+    <div <!--data-ng-controller="NavCtrl"--> class="navbar">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <ul class="nav nav-tabs">
+                    <li><a ui-sref="home">Home</a></li>
+                    <!--<li data-access-level="accessLevels.anon" active-nav ><a href="/login">Log in</a></li>-->
+                    <!--<li data-access-level="accessLevels.anon" active-nav><a href="/register">Register</a></li>
+                    <li data-access-level="accessLevels.user" active-nav><a href="/">Home</a></li>
+                    <li data-access-level="accessLevels.user" active-nav="nestedTop"><a href="/private">Private</a></li>
+                    <li data-access-level="accessLevels.admin" active-nav><a href="/admin">Admin</a></li>
+                    <li data-access-level="accessLevels.user"><a href="" data-ng-click="logout()">Log out</a></li>
+                    <div id="userInfo" data-access-level="accessLevels.user" class="pull-right">Welcome&nbsp;<strong>{{ user.username }}&nbsp;</strong><span data-ng-class="{&quot;label-info&quot;: user.role.title == userRoles.user.title, &quot;label-success&quot;: user.role.title == userRoles.admin.title}" class="label">{{ user.role.title }}</span></div>-->
+                </ul>
             </div>
         </div>
     </div>
+    <div data-ui-view class="container"></div>
+    <div id="alertBox" data-ng-show="error" class="alert alert-danger">
+        <button type="button" data-ng-click="error = null;" class="close">&times;</button><strong>Oh no!&nbsp;</strong><span data-ng-bind="error"></span>
+    </div>
+    
+    <!-- Partial views... Load up front to make transitions smoother-->
+    <script type="text/ng-template" id="404">
+        <h1>404</h1>
+        <p>Ain't nothing here</p>
+    </script>
+    <!--<script type="text/ng-template" id="admin">
+        <h1>Admin</h1>
+        <p>This view is visible to users with the administrator role.</p>
+        <table data-ng-hide="loading" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Username</th>
+                    <th>Role</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-repeat="user in users">
+                    <td>{{ user.id }}</td>
+                    <td><i data-ng-show="user.provider == 'twitter'" class="fa fa-twitter"></i><i data-ng-show="user.provider == 'facebook'" class="fa fa-facebook-square"></i><i data-ng-show="user.provider == 'google'" class="fa fa-google-plus-square"></i><i data-ng-show="user.provider == 'linkedin'" class="fa fa-linkedin"></i> {{ user.username }}</td>
+                    <td><span data-ng-class="{&quot;label-info&quot;: user.role.title == userRoles.user.title, &quot;label-success&quot;: user.role.title == userRoles.admin.title}" class="label">{{ user.role.title }}</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </script>-->
+    <!--<script type="text/ng-template" id="home">
+        <h1>Hello</h1>
+        <p>This view is visible to logged in users.</p>
+    </script>
+    <script type="text/ng-template" id="login">
+        <h1>Log in</h1>
+        <p>This site is an example of how one can implement role based authentication in Angular applications as outlined in<a href="http://www.frederiknakstad.com/authentication-in-single-page-applications-with-angular-js/"> this blogpost</a>. All the code can be found in<a href="https://github.com/fnakstad/angular-client-side-auth"> this GitHub repository</a>. You can either register a new user, log in with one of the two predefined users...</p>
+        <ul>
+            <li>admin/123</li>
+            <li>user/123</li>
+        </ul>
+        <hr>
+        <form ng-submit="login()" name="loginForm" role="form" class="form-horizontal">
+            <div class="form-group">
+                <label for="username" class="control-label col-sm-2">Username</label>
+                <div class="col-sm-10">
+                    <input type="text" data-ng-model="username" placeholder="Username" name="username" required autofocus class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password" class="control-label col-sm-2">Password</label>
+                <div class="col-sm-10">
+                    <input type="password" data-ng-model="password" placeholder="Password" name="password" required class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label for="rememberme" class="checkbox">
+                            <input type="checkbox" data-ng-model="rememberme" name="rememberme">Remember me
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" data-ng-disabled="loginForm.$invalid" class="btn btn-default">Log in</button>
+                </div>
+            </div>
+        </form>
+        <hr>
+        <p>... or use one of them fancy social logins:</p>
+        <div class="btn-group"><a href="" data-ng-click="loginOauth('facebook')" class="btn btn-default"><i class="fa fa-facebook-square"></i> Facebook</a><a href="" data-ng-click="loginOauth('twitter')" class="btn btn-default"><i class="fa fa-twitter"></i> Twitter</a><a href="" data-ng-click="loginOauth('google')" class="btn btn-default"><i class="fa fa-google-plus-square"></i> Google</a><a href="" data-ng-click="loginOauth('linkedin')" class="btn btn-default"><i class="fa fa-linkedin"></i> LinkedIn</a></div>
+    </script>
+    <script type="text/ng-template" id="private/layout">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-md-push-6">
+                    <div data-ng-controller="NavCtrl" class="list-group">
+                        <div class="list-group-item"><strong>Nested menu</strong></div><a href="/private" active-nav class="list-group-item">Nested view</a><a href="/private/nested" active-nav class="list-group-item">Another nested view</a><a href="/private/admin" active-nav data-access-level="accessLevels.admin" class="list-group-item">A nested admin view</a>
+                    </div>
+                </div>
+                <div data-ui-view class="col-md-6 col-md-pull-4"></div>
+            </div>
+        </div>
+    </script>
+    <script type="text/ng-template" id="private/home">
+        <h1>Private view</h1>
+        <p>This nested view is visible to logged in users</p>
+    </script>
+    <script type="text/ng-template" id="private/nested">
+        <h1>Private view</h1>
+        <p>This other nested view is also visible to logged in users</p>
+    </script>
+    <script type="text/ng-template" id="private/nestedAdmin">
+        <h1>Private view</h1>
+        <p>This nested view is only available to&nbsp;<span class="label label-success">admin</span>&nbsp;users</p>
+    </script>
+    <script type="text/ng-template" id="register">
+        <h1>Register</h1>
+        <form ng-submit="register()" name="registerForm" role="form" class="form-horizontal">
+            <div class="form-group">
+                <label for="username" class="control-label col-sm-2">Username</label>
+                <div class="col-sm-10">
+                    <input type="text" data-ng-model="username" placeholder="Username" name="username" required data-ng-minlength="1" data-ng-maxlength="20" autofocus class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password" class="control-label col-sm-2">Password</label>
+                <div class="col-sm-10">
+                    <input type="password" data-ng-model="password" placeholder="Password" name="password" required data-ng-minlength="5" data-ng-maxlength="60" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="radio radio-inline">
+                    <label>
+                        <input type="radio" name="role" data-ng-model="role" id="adminRole" data-ng-value="userRoles.admin">Administrator
+                    </label>
+                </div>
+                <div class="radio radio-inline">
+                    <label>
+                        <input type="radio" name="role" data-ng-model="role" id="adminRole" data-ng-value="userRoles.user">Normal user
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="controls">
+                    <button type="submit" data-ng-disabled="registerForm.$invalid" class="btn">Submit</button>
+                </div>
+            </div>
+            <div ng-show="registerForm.$invalid &amp;&amp; registerForm.$dirty" class="alert alert-danger">
+                <strong>Please correct the following errors:</strong>
+                <ul>
+                    <li ng-show="registerForm.username.$error.required">Username is required</li>
+                    <li ng-show="registerForm.username.$error.minlength">Username has to be at least 1 character long</li>
+                    <li ng-show="registerForm.username.$error.maxlength">Username has to be at most 20 character long</li>
+                    <li ng-show="registerForm.password.$error.required">Password is required</li>
+                    <li ng-show="registerForm.password.$error.minlength">Password must be at least 5 characters long</li>
+                    <li ng-show="registerForm.password.$error.maxlength">Password must be at most 60 characters long</li>
+                </ul>
+            </div>
+        </form>
+    </script>-->
 </body>
+
+
+<script src="services/routingConfig.js"></script>
+<script src="app.js"></script>
+
+<!--<script src="services/userService.js"></script>
+<script src="services/AuthService.js"></script>
+
+<script src="controllers/loginController.js"></script>
+<script src="controllers/NavCtrlController.js"></script>
+<script src="controllers/userController.js"></script>
+
+<script src="directives/directives.js"></script>-->
+
+
+
 </html>  
