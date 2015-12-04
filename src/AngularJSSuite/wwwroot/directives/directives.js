@@ -65,3 +65,19 @@ angular.module('AngularSuiteApp').directive('activeNav', ['$location', function 
     }
 
 }]);
+
+angular.module('AngularSuiteApp').directive('btbwMenu', function () {
+    return {
+        controller: function ($scope, $http) {
+            $http.get('menu.json').success(function (data) {
+                $scope.menu = data;
+                $scope.submenu = data[0].sub;
+            });
+            $scope.changeSub = function (menuId) {
+                $scope.submenu = $scope.menu[menuId].sub;
+            }
+        },
+        restrict: 'E',
+        templateUrl: 'views/menu.tpl.html'
+    };
+});

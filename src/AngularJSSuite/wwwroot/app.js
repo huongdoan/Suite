@@ -1,17 +1,13 @@
-(function () {
+﻿(function () {
     'use strict';
 
-    angular.module('AngularSuiteApp', [
+    angular.module('app', [
         // Angular modules 
-        'ngRoute', 'ngCookies'
+        'ngRoute'
 
         // Custom modules 
 
         // 3rd Party Modules
-
-    ])
-    .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
-
-
-    }]);
+        
+    ]);
 })();
