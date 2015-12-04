@@ -14,6 +14,7 @@ require.config({
         'blockUI': 'lib/angular-block-ui/dist/angular-block-ui',
         'ngload': 'lib/custom/ngload',
         'angular-sanitize': 'lib/angular-sanitize/angular-sanitize',
+
     },
 
     // Add angular modules that does not support AMD out of the box, put it in a shim

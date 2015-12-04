@@ -36,7 +36,7 @@
                .when("/", angularAMD.route({
 
                    templateUrl: function (rp) { return 'Views/Main/default.html'; },
-                   controllerUrl: "Views/Main/defaultController"
+                   controllerUrl: "controllers/defaultController"
 
                }))
 
