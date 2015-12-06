@@ -13,8 +13,8 @@
     "angular-block-ui": "",
     "angularAMD": "",
     "requirejs": "",
-    "ui-bootstrap": "",
-    "ngload": ""
+    "ui-bootstrap": ""
+    
   },
   "exportsOverride": {
     "bootstrap": {
