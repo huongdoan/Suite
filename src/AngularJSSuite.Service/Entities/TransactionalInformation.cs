@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AngularJSSuite.Models
+namespace AngularJSSuite.Services.Entities
 {
     public class TransactionalInformation
     {
         public bool ReturnStatus { get; set; }
-        public List<String> ReturnMessage { get; set; }
-        public Hashtable ValidationErrors;
+        public List<string> ReturnMessage { get; set; }
+        public Dictionary<string,string> ValidationErrors;
         public int TotalPages;
         public int TotalRows;
         public int PageSize;
@@ -20,7 +20,7 @@ namespace AngularJSSuite.Models
         {
             ReturnMessage = new List<String>();
             ReturnStatus = true;
-            ValidationErrors = new Hashtable();
+            ValidationErrors = new Dictionary<string, string>();
             TotalPages = 0;
             TotalPages = 0;
             PageSize = 0;

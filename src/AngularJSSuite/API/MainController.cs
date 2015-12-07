@@ -7,6 +7,7 @@ using Microsoft.AspNet.Mvc;
 using AngularJSSuite.Models;
 using Microsoft.AspNet.Http.Authentication;
 using System.Security.Claims;
+using AngularJSSuite.Services.Entities;
 
 namespace AngularJSSuite
 {
@@ -57,12 +58,16 @@ namespace AngularJSSuite
         [HttpGet]
         public ApplicationApiModel InitializeApplication()
         {
+            ApplicationApiModel applicationWebApiModel = new ApplicationApiModel();
+            TransactionalInformation transaction = new TransactionalInformation();
+
 
 
             return null;
 
         }
 
+        
         [Route("Login")]
         [HttpPost]
         public ActionResult Login()
