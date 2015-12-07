@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AngularJSSuite.Models
+namespace AngularJSSuite.Service.Entities
 {
-    public class ApplicationApiModel
+    public class ApplicationApiModel : TransactionalInformation
     {
         public List<ApplicationMenu> MenuItems;
 

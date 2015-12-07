@@ -1,33 +1,62 @@
 ﻿(function () {
     'use strict';
 
-    angular
-        .module('AngularSuiteApp')
-        .controller('loginController', loginController);
+    define(['application-configuration', 'accountsService', 'alertsService'], function (app) {
 
-    loginController.$inject = ['$rootScope', '$scope', '$location', '$window', 'AuthService'];
+        app.register.controller('loginController', ['$scope', '$rootScope', 'accountsService', 'alertsService',
+            function ($scope, $rootScope, accountsService, alertsService) {
 
-    function loginController($rootScope, $scope, $location, $window, AuthService) {
-        /* jshint validthis:true */
-        var vm = this;
-        vm.title = 'loginController';
-        $scope.rememberme = true;
-        $scope.login = function () {
-            Auth.login({
-                username: $scope.username,
-                password: $scope.password,
-                rememberme: $scope.rememberme
-            },
-                function (res) {
-                    $location.path('/');
-                },
-                function (err) {
-                    $rootScope.error = "Failed to login";
-                });
-        };
+                $rootScope.closeAlert = alertsService.closeAlert;
+                $rootScope.alerts = [];
 
-        $scope.loginOauth = function (provider) {
-            $window.location.href = '/auth/' + provider;
-        };
-    }
+                $scope.initializeController = function () {
+
+                    $scope.UserName = "";
+                    $scope.Password = "";
+
+                    alertsService.RenderSuccessMessage("Please register if you do not have an account.");
+
+                }
+
+                $scope.login = function () {
+                    $rootScope.IsloggedIn = false;
+                    var user = $scope.createLoginCredentials();
+                    accountsService.login(user, $scope.loginCompleted, $scope.loginError);
+                }
+
+                $scope.loginCompleted = function (response) {
+                    $rootScope.MenuItems = response.MenuItems;
+                    window.location = "/applicationMasterPage.html#/Customers/CustomerInquiry";
+                }
+
+                $scope.loginError = function (response) {
+
+                    alertsService.RenderErrorMessage(response.ReturnMessage);
+
+                    $scope.clearValidationErrors();
+                    alertsService.SetValidationErrors($scope, response.ValidationErrors);
+
+                }
+
+                $scope.clearValidationErrors = function () {
+
+                    $scope.UserNameInputError = false;
+                    $scope.PasswordInputError = false;
+
+                }
+
+                $scope.createLoginCredentials = function () {
+
+                    var user = new Object();
+
+                    user.UserName = $scope.UserName;
+                    user.Password = $scope.Password;
+
+                    return user;
+
+                }
+
+            }]);
+    });
+
 })();

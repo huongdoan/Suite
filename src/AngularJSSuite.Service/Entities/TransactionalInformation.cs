@@ -15,6 +15,7 @@ namespace AngularJSSuite.Services.Entities
         public int TotalRows;
         public int PageSize;
         public Boolean IsAuthenicated;
+        public string HttpStatusCode;
 
         public TransactionalInformation()
         {

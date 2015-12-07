@@ -8,12 +8,17 @@ using AngularJSSuite.Models;
 using Microsoft.AspNet.Http.Authentication;
 using System.Security.Claims;
 using AngularJSSuite.Services.Entities;
+using AngularJSSuite.Service.Entities;
+using AngularJSSuite.Service.Interface;
 
 namespace AngularJSSuite
 {
     [Route("api/[controller]")]
     public class MainController : Controller
     {
+
+        [FromServices]
+        public IApplicationDataService ApplicationDataService { get; set; }
 
         private AuthenticationManager AuthenticationManager
         {
@@ -61,16 +66,27 @@ namespace AngularJSSuite
             ApplicationApiModel applicationWebApiModel = new ApplicationApiModel();
             TransactionalInformation transaction = new TransactionalInformation();
 
+            List<ApplicationMenu> menuItems = ApplicationDataService.GetMenuItems(User.Identity.IsAuthenticated, out transaction);
 
-
-            return null;
+            if (transaction.ReturnStatus == false)
+            {
+                applicationWebApiModel.ReturnMessage = transaction.ReturnMessage;
+                applicationWebApiModel.ReturnStatus = transaction.ReturnStatus;
+                applicationWebApiModel.HttpStatusCode = "400";
+                return applicationWebApiModel;
+            }
+            applicationWebApiModel.ReturnMessage.Add("Application has been initialized.");
+            applicationWebApiModel.ReturnStatus = transaction.ReturnStatus;
+            applicationWebApiModel.MenuItems = menuItems;
+            applicationWebApiModel.IsAuthenicated = User.Identity.IsAuthenticated;
+            return applicationWebApiModel;
 
         }
 
         
         [Route("Login")]
         [HttpPost]
-        public ActionResult Login()
+        public string Login()
         {
             AuthenticationManager.SignOut("Cookies");
 
@@ -84,7 +100,7 @@ namespace AngularJSSuite
             var id = new ClaimsIdentity(claims, "local", "name", "role");
 
             AuthenticationManager.SignIn("Cookies", new ClaimsPrincipal(id));//http://leastprivilege.com/2015/07/21/the-state-of-security-in-asp-net-5-and-mvc-6-claims-authentication/
-            return null;
+            return "OK";
         }
 
 

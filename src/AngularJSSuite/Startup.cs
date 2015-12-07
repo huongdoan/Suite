@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
 using Microsoft.Framework.DependencyInjection;
+using AngularJSSuite.Service.Interface;
+using AngularJSSuite.Service.Implement;
 
 namespace AngularJSSuite
 {
@@ -14,6 +16,7 @@ namespace AngularJSSuite
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddSingleton<IApplicationDataService, ApplicationDataService>();
         }
 
         public void Configure(IApplicationBuilder app)
