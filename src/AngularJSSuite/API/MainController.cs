@@ -24,7 +24,7 @@ namespace AngularJSSuite
         {
             get
             {
-                return Context.Authentication;
+                return HttpContext.Authentication;
             }
         }
 
@@ -49,7 +49,7 @@ namespace AngularJSSuite
         {
             TransactionalInformation transaction = new TransactionalInformation();
             transaction.IsAuthenicated = false;
-            AuthenticationManager.SignOut();
+            AuthenticationManager.SignOutAsync("Cookies");
             return transaction;
 
         }
@@ -88,7 +88,7 @@ namespace AngularJSSuite
         [HttpPost]
         public string Login()
         {
-            AuthenticationManager.SignOut("Cookies");
+            AuthenticationManager.SignOutAsync("Cookies");
 
             // var identity = await CustomUserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
             var claims = new List<Claim>
@@ -99,7 +99,7 @@ namespace AngularJSSuite
             };
             var id = new ClaimsIdentity(claims, "local", "name", "role");
 
-            AuthenticationManager.SignIn("Cookies", new ClaimsPrincipal(id));//http://leastprivilege.com/2015/07/21/the-state-of-security-in-asp-net-5-and-mvc-6-claims-authentication/
+            AuthenticationManager.SignInAsync("Cookies", new ClaimsPrincipal(id));//http://leastprivilege.com/2015/07/21/the-state-of-security-in-asp-net-5-and-mvc-6-claims-authentication/
             return "OK";
         }
 
