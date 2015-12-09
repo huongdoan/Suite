@@ -13,7 +13,7 @@ require.config({
         'angularAMD': 'lib/angularAMD/angularAMD',
         'ui-bootstrap': 'lib/angular-ui-bootstrap-bower/ui-bootstrap-tpls',
         'blockUI': 'lib/angular-block-ui/dist/angular-block-ui',
-        'ngload': 'lib/custom/ngload',
+        'ngload': 'lib/angularAMD/ngload',
         'angular-sanitize': 'lib/angular-sanitize/angular-sanitize',
         'mainService': 'services/mainServices',
         'ajaxService': 'services/ajaxServices',
@@ -31,7 +31,8 @@ require.config({
         'angular-route': ['angular'],
         'blockUI': ['angular'],
         'angular-sanitize': ['angular'],
-        'ui-bootstrap': ['angular']
+        'ui-bootstrap': ['angular'],
+        'ngload': ['angularAMD']
 
     },
 

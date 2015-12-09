@@ -8,7 +8,8 @@
         "Microsoft.AspNet.Mvc": "6.0.0-beta5",
         "Ix-Async": "1.2.3",
         "System.Collections.Immutable": "1.1.36",
-        "AngularJSSuite.Service": "1.0.0-*"
+        "AngularJSSuite.Service": "1.0.0-*",
+        "System.Net.Http": "4.0.0-beta-23019"
 
     },
 

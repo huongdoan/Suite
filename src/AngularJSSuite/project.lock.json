@@ -1038,6 +1038,11 @@
       },
       "System.Linq/4.0.0-beta-23019": {},
       "System.Linq.Parallel/4.0.0-beta-23019": {},
+      "System.Net.Http/4.0.0-beta-23019": {
+        "frameworkAssemblies": [
+          "System.Net.Http"
+        ]
+      },
       "System.Reflection.Metadata/1.0.21": {
         "dependencies": {
           "System.Collections.Immutable": "1.1.36"
@@ -1972,6 +1977,22 @@
         "ref/win8/_._"
       ]
     },
+    "System.Net.Http/4.0.0-beta-23019": {
+      "sha512": "Z0FOEd5NsFPmU8pfWWdaNu2efWEfBjtjml7TG/kptpGeD7XhvhkVPlhItCX1c8Jnl74qJxdSnxKN03qtmu1KJg==",
+      "files": [
+        "System.Net.Http.4.0.0-beta-23019.nupkg",
+        "System.Net.Http.4.0.0-beta-23019.nupkg.sha512",
+        "System.Net.Http.nuspec",
+        "lib/DNXCore50/System.Net.Http.dll",
+        "lib/net45/_._",
+        "lib/netcore50/System.Net.Http.dll",
+        "lib/win8/_._",
+        "ref/dotnet/System.Net.Http.dll",
+        "ref/net45/_._",
+        "ref/netcore50/System.Net.Http.dll",
+        "ref/win8/_._"
+      ]
+    },
     "System.Reflection.Metadata/1.0.21": {
       "serviceable": true,
       "sha512": "CAhcY0EJFLXfxo5YRV/ytkTOeTBho8zKjLu+9LvEI5NIVmanp1yMUzYQdjvXpHbyV0Qt1KuLXcTCc9t9FVH3Wg==",
@@ -2036,7 +2057,8 @@
       "Microsoft.AspNet.Mvc >= 6.0.0-beta5",
       "Ix-Async >= 1.2.3",
       "System.Collections.Immutable >= 1.1.36",
-      "AngularJSSuite.Service >= 1.0.0-*"
+      "AngularJSSuite.Service >= 1.0.0-*",
+      "System.Net.Http >= 4.0.0-beta-23019"
     ],
     "DNX,Version=v4.5.1": [
       "System.Linq.Parallel >= 4.0.0-beta-23019"

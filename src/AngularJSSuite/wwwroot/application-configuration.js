@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    define(['angularAMD', 'angular-route', 'ui-bootstrap', 'angular-sanitize', 'blockUI', ], function (angularAMD) {
+    define(['angularAMD', 'angular-route', 'ui-bootstrap', 'angular-sanitize', 'blockUI', 'ngload'], function (angularAMD) {
         var app = angular.module("AngularSuiteApp", ['ngRoute', 'blockUI', 'ngSanitize', 'ui.bootstrap']);
 
         app.filter("leadingZeroes", function () {

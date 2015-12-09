@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using AngularJSSuite.Models;
+using System.Net.Http;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -36,6 +37,14 @@ namespace AngularJSSuite.API
         {
             var ur = _user.FirstOrDefault(u => u.ID == id);
             return ur;
+        }
+
+        [Route("RegisterUser")]
+        [HttpPost]
+        public ActionResult RegisterUser()
+        {
+
+
         }
     }
 }
